@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unity WebGL with WebView</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #unityContainer {
+            width: 100%;
+            height: 50%;
+            background: #000;
+        }
+
+        #webViewContainer {
+            width: 100%;
+            height: 50%;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="unityContainer"></div>
+    <div id="webViewContainer">
+        <iframe id="webView" src="https://lottobets.co/"></iframe>
+    </div>
+    <script>
+        var buildUrl = "Build/";
+        var loaderUrl = buildUrl + "yourgame.loader.js";
+        var config = {
+            dataUrl: buildUrl + "yourgame.data",
+            frameworkUrl: buildUrl + "yourgame.framework.js",
+            codeUrl: buildUrl + "yourgame.wasm",
+            streamingAssetsUrl: "StreamingAssets",
+            companyName: "DefaultCompany",
+            productName: "IFrameTest",
+            productVersion: "1.0",
+        };
+
+        var script = document.createElement("script");
+        script.src = loaderUrl;
+        script.onload = () => {
+            createUnityInstance(document.querySelector("#unityContainer"), config);
+        };
+        document.body.appendChild(script);
+    </script>
+</body>
+</html>
